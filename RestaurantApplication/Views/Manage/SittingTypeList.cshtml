@@ -1,0 +1,30 @@
+﻿@model IEnumerable<SittingType>
+
+@{
+    ViewData["Title"] = "SittingTypeList";
+}
+
+<section style="margin-top: 100px" class="module pt-0 pb-0">
+    <div class="row position-relative m-0">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="module-title font-alt align-left">Manage Sitting Types</h2>
+                <p class="module-subtitle font-serif align-left">Bean Scean Administation Board</p>
+
+                <section style="margin-bottom: 350px" class="module pt-0 pb-0">
+
+@*<h1>Manage Sittings - <a href="~/Manage/Index/">SittingType</a> - List</h1>*@
+<div style="border: 1px solid black; padding:15px; margin:5px">
+    <p>Existing Sitting Type: </p>
+    @foreach(var t in Model)
+    {
+        <p> - @t.Name | <a asp-action="SittingTypeDelete" asp-route-id="@t.Id">Delete</a></p>
+
+    }
+    <hr />
+    <a href="~/Manage/SittingTypeCreate/" class="btn btn-primary">Create A New SittingType</a>
+</div>
+
+            </div>
+        </div>
+    </div>

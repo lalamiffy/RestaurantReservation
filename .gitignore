@@ -1,0 +1,15 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.rsuser
+*.db
+*.sqlite
+appsettings.*.local.json
+secrets.json
+TestResults/
+publish/
+deployment.txt
+RestaurantApplication_old_obj_backup/
+RestaurantReservation.sln

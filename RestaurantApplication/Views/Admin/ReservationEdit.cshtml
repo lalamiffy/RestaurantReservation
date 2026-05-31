@@ -1,0 +1,113 @@
+﻿@model Reservation
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1><a href="~/Admin/Reservations">Manage</a> - <a asp-action="ReservationDetails" asp-route-id="@Model.Id">Reservations</a>Reservations - Edit</h1>
+
+
+<div style="background-color: lightgrey; margin:5px; padding:15px">
+    @*<div>
+        <label for="selectedSitting">Sitting: </label>
+        <a href="~/Booking/SittingsList/">Change</a>
+        <div style="border: 1px solid black; padding:15px; margin:5px">
+            <h3> @Model.Sitting.SittingType.Name </h3>
+            <p>Sitting Date: @Model.Sitting.StartTime.ToString("dd/MM/yyyy") </p>
+            <p>Time Range: @Model.Sitting.StartTime.ToString("hh:mm tt") - @Model.Sitting.EndTime.ToString("hh:mm tt") </p>
+            <p>Capacity: @Model.Sitting.Capacity </p>
+        </div>
+
+    </div>*@
+
+    <form asp-controller="Admin" asp-action="ReservationEdit">
+
+
+        <div>
+            <label>Number of Guest: </label>
+            <input asp-for="Guests" />
+            <span asp-validation-for="Guests" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label>Reservation DateTime: </label>
+            <input asp-for="StartTime" />
+            <span asp-validation-for="StartTime" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label>Duration (mins): </label>
+            <input asp-for="Duration" />
+            <span asp-validation-for="Duration" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label>Notes: </label><br />
+            <input asp-for="Notes" />
+            <span asp-validation-for="Notes" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label>Status: </label>
+            @Html.DropDownListFor(
+                m=>m.Status.Id,
+                ViewBag.Statuses as SelectList,
+                "-- Select Status --",
+                new { @class = "form-control", id="StatusId"}
+            )
+            <span asp-validation-for="Status.Id" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label>Source: </label>
+            @Html.DropDownListFor(
+                m=>m.Source.Id,
+                ViewBag.Sources as SelectList,
+                "-- Select Source --",
+                new { @class = "form-control", id="SourcesId"}
+                )
+            <span asp-validation-for="Source.Id" class="text-danger"></span>
+        </div>
+
+          
+
+        <input type="submit" value="Save" />
+
+         
+    </form>
+    <br />
+        <div>
+            <label>Reserverd tables: </label>
+             @foreach (var t in Model.ReservedTables)
+                {
+                    <li>@t.Tables.Number</li>
+                }
+      
+           
+        </div>
+    <button id="remove-tables-btn" type="button">Remove Reserved Tables</button>
+
+
+</div>
+
+<script>
+    // Attach a click event listener to the button
+    document.getElementById("remove-tables-btn").addEventListener("click", function () {
+        // Make an AJAX call to the server
+        var reservationId = @Model.Id;
+        var url = "/Admin/RemoveReservedTables?reservationId=" + reservationId;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Success: reload the page
+                window.location.reload();
+            } else {
+                // Error: display an error message
+                alert("Error: " + xhr.statusText);
+            }
+        };
+        xhr.send();
+    });
+</script>
+
+        

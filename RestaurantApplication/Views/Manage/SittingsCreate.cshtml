@@ -1,0 +1,61 @@
+@model RestaurantApplication.Models.SetSittingVM;
+
+@{
+    ViewData["Title"] = "SittingsCreate";
+}
+<section style="margin-top: 100px" class="module pt-0 pb-0">
+    <div class="row position-relative m-0">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="module-title font-alt align-left">Add Sittings</h2>
+                <p class="module-subtitle font-serif align-left">Bean Scean Administation Board</p>
+
+
+@*<h1>Manage Sittings - <a href="~/Manage/Index/">Sittings</a> - Create</h1>*@
+<section style="margin-bottom: 100px" class="module pt-0 pb-0">
+<div style="border: 1px solid black; padding:15px; margin:5px">
+
+     <form asp-controller="Manage" asp-action="SittingsCreate" method="post">
+
+        <label asp-for="selectedSittingType"> </label>
+        <select asp-for="selectedSittingType" class="form-control">
+                <option value="">-- Select a sitting type --</option>
+                @foreach (var s in Model.SittingTypes)
+                {
+                    <option value="@s.Name">@s.Name</option>
+                }
+            </select>
+
+            <label asp-for="capacity"> </label>
+            <input type="number" asp-for="capacity" class="form-control" />
+
+            <label asp-for="startTime"> </label>
+            <input type="datetime-local"
+                   asp-for="startTime"
+                   value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"
+                   class="form-control" />
+
+            <label asp-for="endTime"> </label>
+            <input type="datetime-local"
+                   asp-for="endTime"
+                   value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"
+                   class="form-control" />
+
+            @* Active: if available for customer *@
+            <label asp-for="active"> </label>
+            <input type="checkbox" asp-for="active" value="true" /><br />
+
+            @* number days of repeat the sitting  *@
+            <label asp-for="numberOfRepeat"> </label>
+            <input type="number" asp-for="numberOfRepeat" class="form-control" />
+
+            <input type="submit" value="Add Sitting" />
+
+
+    </form>
+
+</div>
+
+            </div>
+        </div>
+    </div>

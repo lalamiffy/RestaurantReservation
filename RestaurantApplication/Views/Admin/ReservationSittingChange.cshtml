@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Sitting>
+@{
+    ViewData["Title"] = "ReservationSittingChange";
+}
+
+<h1><a href="~/Admin/Reservations">Manage</a> - Reservations - SittingChange</h1>
+
+    @foreach (var s in Model)
+    {
+        @if (s.Active == true)
+        {
+            <div style="border: 1px dotted black; padding:15px; margin:5px">
+                <h3> @s.SittingType.Name </h3>
+                <p>Start From: @s.StartTime </p>
+                <p>End to: @s.EndTime </p>
+                <p>Capacity: @s.Capacity </p>
+                <a href="~/Admin/Reservation/@s.Id/ReservationEdit">Select</a>
+            </div>
+        }
+    }
+
+</div>

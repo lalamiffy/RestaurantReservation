@@ -1,0 +1,31 @@
+﻿@model SittingType
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<section style="margin-top: 100px" class="module pt-0 pb-0">
+    <div class="row position-relative m-0">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="module-title font-alt align-left">Delete Sittings</h2>
+                <p class="module-subtitle font-serif align-left">Bean Scean Administation Board</p>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+@*<h1>Manage Sittings - <a href="~/Manage/Index/">SittingType</a> - Delete</h1>*@
+<div style="border: 1px solid black; padding:15px; margin:5px">
+    <h2>Are you sure to delete this sitting type:</h2>
+    <p>- @Model.Name ?</p>
+
+    <form asp-action="SittingTypeDelete">
+        <input type="hidden" asp-for="Id"/>
+        <input type="submit" value="Delete"/>
+    </form>
+
+</div>
+

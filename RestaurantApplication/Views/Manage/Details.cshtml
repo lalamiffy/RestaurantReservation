@@ -1,0 +1,117 @@
+﻿@model Sitting
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1><a href="~/Manage/Index/">Manage Sittings</a> - Details </h1>
+<div style="border: 1px solid black; padding:5px; margin:5px">
+    <h2>@Model.SittingType.Name - @Model.StartTime.ToString("dd/MM/yyyy") </h2>
+    
+    <p>Start Time: @Model.StartTime </p>
+    <p>End Time: @Model.EndTime </p>
+    <p>Capacity: @Model.Capacity</p>
+    <p>Vacancies: @Model.Vacancies</p>
+    <p>Active: @(Model.Active? "Yes" : "No")</p>
+   
+
+</div>
+
+
+
+
+<div>
+
+    <a asp-action="SittingsDelete" asp-route-id="@Model.Id">Delete</a> |
+    <a asp-action="SittingsEdit" asp-route-id="@Model.Id">Edit</a> |
+    <a href="~/Manage/Index/">Back to Sittings List</a>
+</div>
+
+<section class="module">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+                <h4 class="font-alt mb-0">Titan progress bars</h4>
+                <hr class="divider-w mt-10 mb-20">
+                <h6 class="font-alt"><span class="icon-tools-2"></span> Development
+                </h6>
+                <div class="progress">
+                  <div class="progress-bar pb-dark" aria-valuenow="60" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div>
+                <h6 class="font-alt"><span class="icon-strategy"></span> Branding
+                </h6>
+                <div class="progress">
+                  <div class="progress-bar pb-dark" aria-valuenow="80" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div>
+                <h6 class="font-alt"><span class="icon-target"></span> Marketing
+                </h6>
+                <div class="progress">
+                  <div class="progress-bar pb-dark" aria-valuenow="50" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div>
+                <h6 class="font-alt"><span class="icon-camera"></span> Photography
+                </h6>
+                <div class="progress">
+                  <div class="progress-bar pb-dark" aria-valuenow="90" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div>
+                <h4 class="font-alt mb-0">Bootstrap progress bars</h4>
+                <hr class="divider-w mt-10 mb-20">
+                <h6 class="font-alt"><span class="icon-tools-2"></span> Development
+                </h6>
+                <div class="progress">
+                  <div class="progress-bar" aria-valuenow="60" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div>
+                <h6 class="font-alt"><span class="icon-strategy"></span> Branding
+                </h6>
+                <div class="progress">
+                  <div class="progress-bar" aria-valuenow="80" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div>
+                <h6 class="font-alt"><span class="icon-target"></span> Marketing
+                </h6>
+                <div class="progress">
+                  <div class="progress-bar" aria-valuenow="50" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div>
+                <h6 class="font-alt"><span class="icon-camera"></span> Photography
+                </h6>
+                <div class="progress">
+                  <div class="progress-bar" aria-valuenow="90" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div>
+                <h4 class="font-alt mb-0">Animated progress bars</h4>
+                <hr class="divider-w mt-10 mb-20">
+                <h6 class="font-alt"><span class="icon-tools-2"></span> Development
+                </h6>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped active" aria-valuenow="60" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div>
+                <h6 class="font-alt"><span class="icon-strategy"></span> Branding
+                </h6>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped active" aria-valuenow="80" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div>
+                <h6 class="font-alt"><span class="icon-target"></span> Marketing
+                </h6>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped active" aria-valuenow="50" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div>
+                <h6 class="font-alt"><span class="icon-camera"></span> Photography
+                </h6>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped active" aria-valuenow="90" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+    <script src="assets/lib/jquery/dist/jquery.js"></script>
+    <script src="assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="assets/lib/wow/dist/wow.js"></script>
+    <script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
+    <script src="assets/lib/isotope/dist/isotope.pkgd.js"></script>
+    <script src="assets/lib/imagesloaded/imagesloaded.pkgd.js"></script>
+    <script src="assets/lib/flexslider/jquery.flexslider.js"></script>
+    <script src="assets/lib/owl.carousel/dist/owl.carousel.min.js"></script>
+    <script src="assets/lib/smoothscroll.js"></script>
+    <script src="assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
+    <script src="assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/main.js"></script>

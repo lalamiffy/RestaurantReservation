@@ -1,0 +1,46 @@
+﻿@model Reservation
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1><a href="~/Admin/Reservations">Manage</a> - Reservation - Delete</h1>
+<div style="background-color: lightgrey; margin:5px; padding:15px">
+
+    <h2>Are you sure to delete this reservation:</h2>
+
+    <div style="background-color: yellow; border: 1px solid black; padding:5px; margin:5px">
+        <h3>Reservation details:</h3>
+        <p>Sitting Type: @Model.Sitting.SittingType.Name </p>
+        <p>Number of guest: @Model.Guests </p>
+        <p>Date: @Model.StartTime.ToString("dd/MM/yyyy/")</p>
+        <p>Start Time: @Model.StartTime.ToString("hh:mm tt")</p>
+        <p>Duration: @Model.Duration mins</p>
+        <p>Status: @Model.Status.Name</p>
+        <p>Source: @Model.Source.Name</p>
+        <p>
+            Assigned Tables:
+
+            @foreach (var t in Model.ReservedTables)
+            {
+                <li>@t.Tables.Number</li>
+            }
+            @*No assign table now. <a asp-action="Assign" asp-route-id="@Model.Id">Assign Table</a>*@
+
+        </p>
+    </div>
+    <div style="background-color: yellow; border: 1px solid black; padding:5px; margin:5px">
+        <h4>Customer details:</h4>
+        <p>First Name: @Model.Person.FirstName </p>
+        <p>Last Name: @Model.Person.LastName </p>
+        <p>Email: @Model.Person.Email </p>
+        <p>Phone Number: @Model.Person.PhoneNumber </p>
+
+    </div>
+
+    <form asp-action="ReservationDelete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Confirm to Delete"/>
+
+    </form>
+
+</div>

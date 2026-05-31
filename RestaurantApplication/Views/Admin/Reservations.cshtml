@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Reservation>
+@{
+    ViewData["Title"] = "Main";
+}
+
+<section style="margin-top: 100px" class="module pt-0 pb-0">
+    <div class="row position-relative m-0">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="module-title font-alt align-left">Manage Reservations</h2>
+                <p class="module-subtitle font-serif align-left">Bean Scean Administation Board</p>
+
+
+
+
+
+                <section style="margin-bottom: 340px" class="module pt-0 pb-0">
+
+@*<h1><a href="~/Admin/Reservations">Manage</a> - Reservations</h1>*@
+
+<a href="~/Booking/SittingsList/" class="btn btn-primary">Add New Reservation</a>
+<div style="background-color: lightgrey; margin:5px; padding:15px">
+    <h2>Existing Reservation: </h2>
+    @foreach(var r in Model)
+    {
+        <div style="border: 1px solid black; padding:5px; margin:5px">
+            <p>Sitting Type: @r.Sitting.SittingType.Name </p>
+            <p>Number of guest: @r.Guests </p>
+            <p>Date: @r.StartTime.ToString("dd/MM/yyyy/")</p>
+            <p>Start Time: @r.StartTime.ToString("hh:mm tt")</p>
+            <p>Duration: @r.Duration mins</p>
+            <p>Status: @r.Status.Name</p>
+
+            <a asp-action="ReservationDetails" asp-route-id="@r.Id">Details</a> |
+            <a asp-action="ReservationEdit" asp-route-id="@r.Id">Edit</a> |
+            <a asp-action="Assign" asp-route-id="@r.Id">Assign Table</a> |
+        </div>
+    }
+
+
+</div>
+            </div>
+        </div>
+    </div>

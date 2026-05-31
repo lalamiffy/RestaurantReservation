@@ -1,0 +1,115 @@
+@model ReservedTableVM
+@{
+    ViewData["Title"] = "Assign";
+}
+<link rel="stylesheet" href="~/css/seating-chart.css">
+
+<h1><a href="~/Admin/Reservations">Manage</a> - Reservation - Assign</h1>
+
+<div class="assign-layout">
+    <div class="assign-panel">
+        <table class="table table-striped table-border checkout-table">
+            <tbody>
+                <tr>
+                    <th>Customer Name:</th>
+                    <td>@Model.Reservation.Person.FirstName @Model.Reservation.Person.LastName</td>
+                </tr>
+                <tr>
+                    <th>Guest Number:</th>
+                    <td>@Model.Reservation.Guests</td>
+                </tr>
+                <tr>
+                    <th>Current Tables:</th>
+                    <td>
+                        @if (Model.Reservation.ReservedTables.Any())
+                        {
+                            @(string.Join(", ", Model.Reservation.ReservedTables.Select(t => t.Tables.Number)))
+                        }
+                        else
+                        {
+                            <span>Not assigned</span>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <form asp-controller="Admin" asp-action="Assign" method="post" class="assign-form">
+        <input type="hidden" asp-for="Reservation.Id" />
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="assign-actions">
+            <button type="button" class="btn btn-g btn-circle btn-xs" id="clearTables">Clear</button>
+            <button type="button" class="btn btn-g btn-circle btn-xs" id="randomTable">Random</button>
+            <button type="submit" class="btn btn-b btn-circle btn-xs">Save</button>
+        </div>
+
+        <div class="seatmap assign-seatmap">
+            @for (int i = 0; i < Model.reservetables.Length; i++)
+            {
+                var table = Model.reservetables[i];
+                var cssClass = table.Available ? "available" : "occupied";
+                if (table.Selected)
+                {
+                    cssClass += " selected";
+                }
+
+                <label class="seat assign-seat @cssClass">
+                    @if (table.Available)
+                    {
+                        <input type="checkbox" asp-for="reservetables[i].Selected" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" disabled />
+                        <input type="hidden" asp-for="reservetables[i].Selected" value="false" />
+                    }
+                    <input type="hidden" asp-for="reservetables[i].Available" />
+                    <input type="hidden" asp-for="reservetables[i].TableNumber" />
+                    <span class="table-label">@table.TableNumber</span>
+                </label>
+            }
+        </div>
+    </form>
+</div>
+
+<script>
+    const tableChecks = Array.from(document.querySelectorAll('.assign-seat input[type="checkbox"]'));
+
+    function syncSeatState(check) {
+        const seat = check.closest('.assign-seat');
+        seat.classList.toggle('selected', check.checked);
+        seat.classList.remove('seat-pop');
+        void seat.offsetWidth;
+        seat.classList.add('seat-pop');
+    }
+
+    tableChecks.forEach(check => {
+        syncSeatState(check);
+        check.addEventListener('change', () => syncSeatState(check));
+    });
+
+    document.getElementById('clearTables').addEventListener('click', () => {
+        tableChecks.filter(check => !check.disabled).forEach(check => {
+            check.checked = false;
+            syncSeatState(check);
+        });
+    });
+
+    document.getElementById('randomTable').addEventListener('click', () => {
+        const available = tableChecks.filter(check => !check.disabled);
+        if (available.length === 0) {
+            return;
+        }
+
+        available.forEach(check => {
+            check.checked = false;
+            syncSeatState(check);
+        });
+
+        const random = available[Math.floor(Math.random() * available.length)];
+        random.checked = true;
+        syncSeatState(random);
+    });
+</script>

@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Sitting>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section style="margin-top: 100px" class="module pt-0 pb-0">
+    <div class="row position-relative m-0">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="module-title font-alt align-left">Manage Sittings</h2>
+                <p class="module-subtitle font-serif align-left">Bean Scean Administation Board</p>
+
+
+<section style="margin-bottom: 270px" class="module pt-0 pb-0">
+@*<h1>Manage - Index</h1>*@
+<a href="~/Manage/SittingsCreate/" class="btn btn-primary">Add New Sitting</a>
+<a href="~/Manage/SittingTypeList/" class="btn btn-primary">Manage Sitting Types</a>
+<a href="~/Manage/ViewReport/" class="btn btn-primary">View Report</a>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+
+@*<div style="background-color: lightgrey; margin:5px">
+    @foreach(var s in Model)
+    {
+        var color = (s.Vacancies >= s.Capacity/3) ? "Green" : "Red";
+
+        <div style="border: 1px solid black; padding:5px; margin:5px">
+            <h3> @s.SittingType.Name </h3>
+            <p>Start From: @s.StartTime </p>
+            <p>End to: @s.EndTime </p>
+            <p>Capacity: @s.Capacity </p>
+            <p style="background-color:@color">Vacancies: @s.Vacancies</p>
+            <p>Active: @(s.Active ? "Yes" : "No")</p>
+            <a asp-action="SittingsDelete" asp-route-id="@s.Id">Delete</a> |
+            <a asp-action="Details" asp-route-id="@s.Id">Details</a> |
+            <a asp-action="SittingsEdit" asp-route-id="@s.Id">Edit</a> |
+
+        </div>
+
+    }
+
+</div>
+
+*@
+<br/>
+<div style="margin-top:20px" >
+    <table id="example" class="display" style="width:100%">
+
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Sitting Type</th>
+                <th scope="col">Start time</th>
+                <th scope="col">End time</th>
+                <th scope="col">Capacity</th>
+                <th scope="col">Vacancies</th>
+                <th scope="col">Active</th>
+                <th scope="col">Operation</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            @foreach (var s in Model){
+            <tr>
+                <th scope="row">@s.Id</th>
+                <td>@s.StartTime.ToString("yyyy-MM-dd")</td>
+                <td>@s.SittingType.Name</td>
+                <td>@s.StartTime.ToString("hh:mm tt")</td>
+                <td>@s.EndTime.ToString("hh:mm tt")</td>
+                <td>@s.Capacity</td>
+                <td>@s.Vacancies</td>
+                <td>@(s.Active ? "Yes" : "No")</td>
+                <td><a asp-action="SittingsDelete" asp-route-id="@s.Id">Delete</a> |
+            <a asp-action="Details" asp-route-id="@s.Id">Details</a> |
+            <a asp-action="SittingsEdit" asp-route-id="@s.Id">Edit</a> |</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+
+<script>
+    
+$(document).ready(function() {
+    let table = new DataTable('#example');
+
+    $('#example').DataTable({
+            order: [[3, 'desc']],
+    });
+});
+</script>
+            </div>
+        </div>
+    </div>

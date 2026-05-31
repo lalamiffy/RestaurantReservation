@@ -1,0 +1,90 @@
+﻿@model Sitting
+@{
+    ViewData["Title"] = "Details";
+}
+@*    <link href="/lib/assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Volkhov:400i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="/lib/assets/lib/animate.css/animate.css" rel="stylesheet">
+    <link href="/lib/assets/lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/lib/assets/lib/et-line-font/et-line-font.css" rel="stylesheet">
+    <link href="/lib/assets/lib/flexslider/flexslider.css" rel="stylesheet">
+    <link href="/lib/assets/lib/owl.carousel/dist/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/lib/assets/lib/owl.carousel/dist/assets/owl.theme.default.min.css" rel="stylesheet">
+    <link href="/lib/assets/lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
+    <link href="/lib/assets/lib/simple-text-rotator/simpletextrotator.css" rel="stylesheet">*@
+
+
+<div class="row position-relative m-0">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="module-title font-alt align-left mb-30">Sitting Details</h2>
+            <div class="btn-list" style="display: flex;">
+                <div>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-circle btn-danger">Delete</a>
+                </div>&nbsp
+                <div>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-circle btn-primary">Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="divider-w mt-10 mb-20">
+
+
+<div class="row">
+    <div class="col-md-6 mb-30">
+        <h3>@Model.SittingType.Name - @Model.StartTime.ToString("dd/MM/yyyy") </h3>
+        <p>Start Time: @Model.StartTime </p>
+        <p>End Time: @Model.EndTime </p>
+        <p>Capacity: @Model.Capacity</p>
+        <p><span class="icon-strategy"></span> Vacancies:@Model.Vacancies  
+        </p>
+        <p>@(Model.Vacancies * 100 / Model.Capacity) %</p>
+       
+        <div class="progress">
+        <div class="progress-bar" aria-valuenow="@(Model.Vacancies * 100 / Model.Capacity)" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt text-dark"></span></div>
+        </div>
+        <hr class="divider-b mt-10 mb-20">
+        <p>Active: @(Model.Active ? "Yes" : "No")</p>
+        <div>
+            Existing Reservation:
+            <div>
+            @foreach (var r in Model.Reservations)
+            {
+                <button class="btn btn-warning btn-round" type="button">
+                    <a href="~/Administration/Reservation/Details/@r.Id/"> @r.Id </a>
+                </button>
+            }
+            </div>
+        </div>
+        <hr class="divider-w mt-10 mb-20">
+
+    </div>
+</div>
+
+
+
+
+
+@*
+@section Scripts{
+ 
+    <script src="/lib/assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>>
+    <script src="/lib/assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/lib/assets/lib/wow/dist/wow.js"></script>
+    <script src="/lib/assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
+    <script src="/lib/assets/lib/isotope/dist/isotope.pkgd.js"></script>
+    <script src="/lib/assets/lib/imagesloaded/imagesloaded.pkgd.js"></script>
+    <script src="/lib/assets/lib/flexslider/jquery.flexslider.js"></script>
+    <script src="/lib/assets/lib/owl.carousel/dist/owl.carousel.min.js"></script>
+    <script src="/lib/assets/lib/smoothscroll.js"></script>
+    <script src="/lib/assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
+    <script src="/lib/assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
+    <script src="/lib/assets/js/plugins.js"></script>
+    <script src="/lib/assets/js/main.js"></script>
+ 
+}*@
